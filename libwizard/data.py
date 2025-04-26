@@ -59,8 +59,7 @@ def generate_book_backup(input_path, book):
 
 
 def save_metadata(output_path, metadata):
-    # (output_path / "Books" / "Metadata").mkdir(exist_ok=True)
+    (output_path / "Books" / "Metadata").mkdir(exist_ok=True)
 
-    # with open(output_path / "Books" / "Metadata" / f"{int(time.time())}.json", "w") as f:
-    with open(f"{int(time.time())}.json", "w") as f:
+    with open(output_path / "Books" / "Metadata" / f"{int(time.time())}.json", "w") as f:
         json.dump(metadata, f)
