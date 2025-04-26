@@ -17,9 +17,6 @@ def main(
     api_key: str = None,
     n_threads: int = 5,
 ) -> None:
-    input_path = "/Users/felipesassi/Downloads/DELETE"
-    output_path = "/Users/felipesassi/Documents"
-
     input_path, output_path = Path(input_path), Path(output_path)
 
     validator = compose(list, map(lambda x: x.name))
