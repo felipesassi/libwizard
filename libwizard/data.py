@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 import shutil
 import time
 
@@ -6,7 +7,7 @@ from loguru import logger
 from toolz.curried import *
 
 
-def create_book_title(output_path, title):
+def create_book_title(output_path: Path, title: str) -> Path:
     output_file_path = output_path / f"{title}.pdf"
 
     c = 0
@@ -20,15 +21,14 @@ def create_book_title(output_path, title):
 
 
 @curry
-def add_book_to_library(input_path, output_path, book):
+def add_book_to_library(input_path: Path, output_path: Path, book: dict[str, str]) -> dict[str, str]:
     input_file_path = input_path / book.get("original_title")
 
     category = book.get("category", "Without category")
     sub_category = book.get("sub-category", "Without sub-category")
 
-    category_with_sub_category_path = output_path / "Books" / category / sub_category
-    category_with_sub_category_path.mkdir(parents=True, exist_ok=True)
-
+    (output_path / "Books" / category / sub_category).mkdir(parents=True, exist_ok=True)
+    
     original_title = book.get("original_title")
     title = book.get("title", original_title).replace("/", "-").replace(":", " -")
 
@@ -43,7 +43,7 @@ def add_book_to_library(input_path, output_path, book):
 
 
 @curry
-def generate_book_backup(input_path, book):
+def generate_book_backup(input_path: Path, book: dict[str, str]) -> dict[str, str]:
     input_file_path = input_path / book.get("original_title")
 
     output_path = input_path / "PDFs"
@@ -58,7 +58,7 @@ def generate_book_backup(input_path, book):
     return book
 
 
-def save_metadata(output_path, metadata):
+def save_metadata(output_path: Path, metadata: list[dict[str, str]]) -> None:
     (output_path / "Books" / "Metadata").mkdir(exist_ok=True)
 
     with open(output_path / "Books" / "Metadata" / f"{int(time.time())}.json", "w") as f:
