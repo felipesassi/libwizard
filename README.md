@@ -1,8 +1,10 @@
-I always download a lot of ebooks that are saved to my /Downloads folder. In order to create an organized library I developed this Python script that reads all .pdf files in the Downloads folders and generetas a folder with the ebooks organized by category.
+# Introduction
+
+I always download a lot of ebooks that are saved to my /Downloads folder. In order to create an organized library I developed this Python script that reads all .pdf files in the Downloads folders and generates a folder with the ebooks organized by category.
 
 To be able to organize the data the OpenAI API was used to extract, from the ebook's title, the category and the title of it. The following prompt was used:
 
-```markdown
+```
 You are a helpfull assistant that will help me to organize my books to generate a library.
 
 I will pass to you a file name and you must define a category and a sub-category and extract the book's name.
@@ -42,12 +44,14 @@ And always respect this format.
 With this prompt the script generates an output like this:
 
 ```json
-{
-    "title": "EXTRACTED_TITLE",
-    "category": "EXTRACTED_CATEGORY",
-    "sub-category": "EXTRACTED_SUB_CATEGORY",
-    "original_title": "ORIGINAL_TITLE"
-}
+[
+    {
+        "title": "EXTRACTED_TITLE",
+        "category": "EXTRACTED_CATEGORY",
+        "sub-category": "EXTRACTED_SUB_CATEGORY",
+        "original_title": "ORIGINAL_TITLE"
+    }
+]
 ```
 
 This structure is used to generate a folder with all ebooks organized by category and sub-category.
@@ -56,7 +60,11 @@ Is worth to mention that a BACKUP folder is used to maintain a backup of all ebo
 
 # How to use
 
-To use the script you need to run ``uv run main.py``:
+To use the script you need to run:
+
+> ``uv run main.py``
+
+This will generate the following messages in your terminal.
 
 ![Example](images/image.png)
 
